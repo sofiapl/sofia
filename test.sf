@@ -1,0 +1,58 @@
+
+// parametric polymorphism
+function a(foo, bar) {
+    return b(foo, bar);
+}
+
+// ad hoc polymorphism
+function b(foo, bar) {
+    return foo(bar);
+}
+
+function b(foo, bar) {
+    return bar(foo);
+}
+
+function c(foo) {
+    return foo();
+}
+
+function not(a) {
+    if (a) {
+        return False;
+    }
+
+    return True;
+}
+
+// global constant with IIFE
+let test = (function() { return 123; })();
+
+function main() {
+    a(c, function(foo) {
+        let f = foo;
+        let i = 123;
+        let d = .3234;
+        let c = 'a';
+        let b = True;
+
+        // reassigning name
+        let foo = f;
+        let foo = i;
+        let mut foo = d;
+
+        if (not(b)) {
+            undefined;
+        }
+
+        if (b) {
+            // mutable name reassigning
+            foo = i;
+        } else {
+            // function is not defined
+            undefined;
+        }
+
+        return test;
+    });
+}

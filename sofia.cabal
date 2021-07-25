@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c34e87534a9ef40b231835ed9513490caefefa57aa2d549039a4638e2d879c0d
+-- hash: 9f5de900c72c59df6334ce7b0c9f36d70afffb877f4e9df78e7f1b79552b43e6
 
 name:           sofia
 version:        0.1.0.0
@@ -14,10 +14,12 @@ bug-reports:    https://github.com/ProgMiner/sofia/issues
 author:         Eridan Domoratskiy
 maintainer:     eridan200@mail.ru
 copyright:      Copyright (c) Eridan Domoratskiy
-license:        BSD3
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
+    src/Sofia/Lexer.x
+    src/Sofia/Parser.y
     README.md
     ChangeLog.md
 
@@ -27,13 +29,31 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Fqs.Ast
+      Ir
+      Sofia.Ast
+      Sofia.Lexer
+      Sofia.Parser
+      Sofia.Token
+      SofiaToFqs
+      Type
+      Union
+      Utils.ErrorTree
+      Utils.RealNum
+      Value
   other-modules:
       Paths_sofia
   hs-source-dirs:
       src
+  build-tools:
+      alex
+    , happy
   build-depends:
-      base >=4.7 && <5
+      array
+    , base >=4.7 && <5
+    , hashable
+    , mtl
+    , unordered-containers
   default-language: Haskell2010
 
 executable sofia-exe
@@ -43,9 +63,16 @@ executable sofia-exe
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-tools:
+      alex
+    , happy
   build-depends:
-      base >=4.7 && <5
+      array
+    , base >=4.7 && <5
+    , hashable
+    , mtl
     , sofia
+    , unordered-containers
   default-language: Haskell2010
 
 test-suite sofia-test
@@ -56,7 +83,14 @@ test-suite sofia-test
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-tools:
+      alex
+    , happy
   build-depends:
-      base >=4.7 && <5
+      array
+    , base >=4.7 && <5
+    , hashable
+    , mtl
     , sofia
+    , unordered-containers
   default-language: Haskell2010

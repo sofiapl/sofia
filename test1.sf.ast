@@ -1,0 +1,5 @@
+GlobalFunctionStmt "a" [
+    AssignStmt "foo" (CallExpr "b" [IntegerValueExpr 3]),
+    ExprStmt (CallExpr "c" [NameExpr "foo"]),
+    ReturnStmt (CallExpr "d" [IntegerValueExpr 3])
+]

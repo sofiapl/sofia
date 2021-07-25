@@ -1,0 +1,55 @@
+// vim: syntax=javascript
+
+/* ast
+[
+    GlobalFunctionStmt "a" [] [
+        AssignStmt "foo" (CallExpr "b" [ValueExpr (IntegerValue 3)]),
+        ExprStmt (CallExpr "c" [NameExpr "foo"]),
+        ReturnStmt (CallExpr "d" [ValueExpr (IntegerValue 3)])
+    ]
+]
+*/
+
+/* ir
+[
+    ("a", Function [] [
+        IrAssignStmt "foo" (IrCallExpr (Function ["x"] [
+            IrReturnStmt (IrCallExpr (Function ["x"] [
+                IrReturnStmt (IrValueExpr (IntegerValue 0))
+            ]) [IrNameExpr "x"])
+        ]) [IrValueExpr (IntegerValue 3)]),
+        IrExprStmt (IrCallExpr (Function ["x"] [
+            IrReturnStmt (IrValueExpr (IntegerValue 0))
+        ]) [IrNameExpr "foo"]),
+        IrReturnStmt (IrCallExpr (Function ["x"] [
+            IrReturnStmt (IrCallExpr (Function ["x"] [
+                IrReturnStmt (IrValueExpr (IntegerValue 0))
+            ]) [IrValueExpr (IntegerValue 3)])
+        ]) [IrValueExpr (IntegerValue 3)])
+    ])
+]
+*/
+
+function b() {
+    // empty function
+}
+
+function b(x) {
+    return c(x)
+}
+
+function c(x) {
+    return 0
+}
+
+function d(x) {
+    return c(3)
+}
+
+export function a() { // define function
+    foo = b(3) // assign name to expression value
+
+    c(foo) // evaluate expression
+
+    return d(3) // return expression value
+}

@@ -1,12 +1,14 @@
 name:                sofia
 version:             0.1.0.0
 github:              "ProgMiner/sofia"
-license:             BSD3
+license:             MIT
 author:              "Eridan Domoratskiy"
 maintainer:          "eridan200@mail.ru"
 copyright:           "Copyright (c) Eridan Domoratskiy"
 
 extra-source-files:
+- src/Sofia/Lexer.x
+- src/Sofia/Parser.y
 - README.md
 - ChangeLog.md
 
@@ -21,6 +23,14 @@ description:         Please see the README on GitHub at <https://github.com/Prog
 
 dependencies:
 - base >= 4.7 && < 5
+- unordered-containers
+- hashable
+- array
+- mtl
+
+build-tools:
+- happy
+- alex
 
 library:
   source-dirs: src

@@ -72,6 +72,10 @@ types_list = type, [","]
 
 literal = "true"
         | "false"
+        | "NaN"
+        | "Infinity"
+        | "+Infinity"
+        | "-Infinity"
         | literal_positive_integer
         | literal_floating_point_number
         | literal_char
